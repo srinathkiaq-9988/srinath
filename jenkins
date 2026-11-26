@@ -1,0 +1,23 @@
+pipeline{
+    agent any
+    tools{
+        maven 'mvn'
+    }
+    stages{
+        stage('git clone'){
+            steps{
+                git branch: 'main', credentialsId: 'Jenkins-practice', url: 'https://github.com/rishibharathkiaq-12/Rishi.java.git'
+            }
+        }
+                stage('maven Test stage'){
+            steps{
+                sh 'mvn test'
+            }
+        }
+                        stage('maven Build stage'){
+            steps{
+                sh 'mvn clean install -DskipTests=true'
+            }
+        }
+    }
+}
